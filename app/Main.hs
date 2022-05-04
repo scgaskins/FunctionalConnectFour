@@ -4,19 +4,33 @@
 
 module Main where
 import System.IO (hSetBuffering, BufferMode (NoBuffering), stdout)
+--import Move
+--import Board
 
 main :: IO ()
-main =
-  hSetBuffering stdout NoBuffering *>
-  putStrLn "Welcome to Connect 4!!" *>
-  putStrLn "The objective of the game is to simply get "*>
-  putStrLn "four in a row before the other player. Have fun!" *>
-  putStr "Please enter your name: " *>
-  getLine >>= \name ->
-  putStrLn ("Welcome, " ++ name ++ "!")
-  --putStr "Please enter a number: " *>
-  --readLn >>= \n ->
-  --print (n :: Int)
+main = do
+  hSetBuffering stdout NoBuffering
+  putStrLn "Welcome to Connect 4!!"
+  putStrLn "The objective of the game is to "
+  putStrLn "get four in a row before the computer." 
+  putStrLn "The board is 7 columns x 6 rows"
+  putStrLn "Here is the starting board!"
+  --print initial board to screen
+  --playGame board
+  
+-- playGame :: Board -> IO ()
+-- playGame = do
+--   putStrLn "Please enter a column number from 1 to 7 to "
+--   putStrLn "place your piece: "
+--   columnNum <- getLine
+--   print columnNum --update board with piece
+  --check if won
+  --if not keep playing
+
+--isWon :: Board -> IO ()
+--isWon = do
+
+
 
 -- main: make board and call event loop
 
