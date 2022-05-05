@@ -4,7 +4,7 @@
 
 module Board where
 
-import Data.List (group, transpose)
+import Data.List (group, transpose, intersperse)
 
 type Column = Int
 type Row = Int
@@ -23,7 +23,14 @@ emptyBoard columns rows = replicate columns (replicate rows Empty)
 --formatBoard gives the board new line characters to split the board by rows
 --to read the board easier for the users
 formatBoard :: Board -> String
-formatBoard = unlines . map show . transpose
+formatBoard = unlines . map (intersperse ' ' . map formatColor) . transpose
+
+-- Converts colors to a single Char to make them
+-- easier to read
+formatColor :: Color -> Char
+formatColor Empty  = '*'
+formatColor Red    = 'O'
+formatColor Yellow = 'X'
 
 -- Returns Columns whose topmost row is still not filled
 possibleMoves :: Board -> [Column]

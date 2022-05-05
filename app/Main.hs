@@ -27,10 +27,10 @@ main = do
   
 playGame :: Board -> Int -> IO ()
 playGame board playerIndex
-  | checkWin Red board    = putStrLn "Red Wins!!" 
-  | checkWin Yellow board = putStrLn "Yellow Wins!!"
+  | checkWin Red board    = putStrLn (formatColor Red :" Wins!!") 
+  | checkWin Yellow board = putStrLn (formatColor Yellow : " Wins!!")
   | otherwise = do
-      putStrLn ("Player " ++ show (playerIndex + 1) ++ " (" ++ show (changePlayers players playerIndex) ++ "):")
+      putStrLn ("Player " ++ show (playerIndex + 1) ++ " (" ++ formatColor (changePlayers players playerIndex) : "):")
       putStrLn "Enter a column number "
       putStrLn "from 1 to 7 to place your piece: "
       playerInput <- getLine
