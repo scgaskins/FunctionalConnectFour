@@ -4,6 +4,7 @@
 
 module Main where
 import System.IO (hSetBuffering, BufferMode (NoBuffering), stdout)
+import Text.Read (readMaybe)
 import Board
 
 players :: [Color]
@@ -33,10 +34,9 @@ playGame board playerIndex
       putStrLn ("Player " ++ show (playerIndex + 1) ++ " (" ++ formatColor (changePlayers players playerIndex) : "):")
       putStrLn "Enter a column number "
       putStrLn "from 1 to 7 to place your piece: "
-      playerInput <- getLine
-      let playerColumnNum = (read playerInput :: Int)
+      playerColumnNum <- readPlayerInput (possibleMoves board)
       --update board with piece
-      case makeMove (changePlayers players playerIndex) (playerColumnNum - 1) board of
+      case makeMove (changePlayers players playerIndex) playerColumnNum board of
         Just newBoard -> do
           putStrLn "-------------------------------------------------"
           putStrLn ""
@@ -46,3 +46,19 @@ playGame board playerIndex
         Nothing       -> do
           putStrLn "That is not a valid column"
           playGame board playerIndex
+
+-- Given a list of valid inputs it reads in the user's
+-- input and returns the input - 1 if it is a number in the
+-- valid input list. Otherwise it prompts the user again
+readPlayerInput :: [Int] -> IO Int
+readPlayerInput validInputs = do
+  playerInput <- getLine
+  case (readMaybe playerInput :: Maybe Int) of
+    Just i
+      | (i-1) `elem` validInputs -> return (i-1)
+      | otherwise                -> do
+        putStrLn "That is not a valid column"
+        readPlayerInput validInputs
+    Nothing                      -> do
+      putStrLn "That is not a number"
+      readPlayerInput validInputs
