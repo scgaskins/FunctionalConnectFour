@@ -8,7 +8,6 @@ import Data.List (group, transpose)
 
 type Column = Int
 type Row = Int
-type Coords = (Column, Row)
 
 -- Enumeration for the 3 Colors
 data Color = Empty | Red | Yellow
@@ -89,42 +88,60 @@ longestSequence a = foldr (max . length) 0 . filter (a `elem`) . group
 -- Uses possibleMoves and makeMove
 --moves :: Board -> Color -> [Board]
 
+-- This generates a list of all diagonal lines in the
+-- board
 allDiagonals :: Board -> [[Color]]
 allDiagonals b = allLeftToRightDiags b ++ allRightToLeftDiags b
 
+-- This generates all diagonal lines in the board
+-- that move up and to the left from the starting point
 allRightToLeftDiags :: Board -> [[Color]]
 allRightToLeftDiags b = rightToLeftDiagsCDecr len wi b ++ rightToLeftDiagsRDecr len wi b
     where (len, wi) = (length b - 1,length (head b) - 1)
 
+-- This generates all the diagonal lines that start in the
+-- bottom row of the board and move up and to the left
 rightToLeftDiagsCDecr :: Column -> Row -> Board -> [[Color]]
 rightToLeftDiagsCDecr c r b
     | c < 0 || r < 0 = []
     | otherwise      = rightToLeftDiagonal c r b : rightToLeftDiagsCDecr (c-1) r b
 
+-- This generates all the diagonal lines that start in the
+-- last column of the board and move up and to the left
 rightToLeftDiagsRDecr :: Column -> Row -> Board -> [[Color]]
 rightToLeftDiagsRDecr c r b
     | c < 0 || r < 0 = []
     | otherwise      = rightToLeftDiagonal c r b : rightToLeftDiagsRDecr c (r-1) b
 
+-- This generates a diagonal line through the board
+-- moving up and to the left from the starting point
 rightToLeftDiagonal :: Column -> Row -> Board -> [Color]
 rightToLeftDiagonal c r b
     | c < 0 || r < 0 = []
     | otherwise      = ((b !! c) !! r) : rightToLeftDiagonal (c - 1) (r - 1) b
 
+-- This generates all the diagonal lines in the board that
+-- move up and to the left from their starting point
 allLeftToRightDiags :: Board -> [[Color]]
 allLeftToRightDiags b = leftToRightDiagsCIncr 0 wi b ++ leftToRightDiagsRDecr 0 wi b
     where wi = length (head b) - 1
 
+-- This generates all the diagonal lines that start in the
+-- first column of the board and move up and to the right
 leftToRightDiagsRDecr :: Column -> Row -> Board -> [[Color]]
 leftToRightDiagsRDecr c r b
     | c >= length b || r < 0 = []
     | otherwise              = leftToRightDiagonal c r b : leftToRightDiagsRDecr c (r-1) b
 
+-- This generates all the diagonal lines that start in the
+-- bottom row of the board and move up and to the right
 leftToRightDiagsCIncr :: Column -> Row -> Board -> [[Color]]
 leftToRightDiagsCIncr c r b
     | c >= length b || r < 0 = []
     | otherwise              = leftToRightDiagonal c r b : leftToRightDiagsCIncr (c+1) r b
 
+-- This generates a diagonal line through the board
+-- moving up and to the right from the starting point
 leftToRightDiagonal :: Column -> Row -> Board -> [Color]
 leftToRightDiagonal c r b
     | c >= length b || r < 0 = []
