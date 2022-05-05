@@ -23,19 +23,21 @@ main = do
   
 playGame :: Board -> Int -> IO ()
 playGame board playerIndex
-  | checkWin Red board    = printStrLn "Red Wins!!" 
-  | checkWin Yellow board = printStrLn "Yellow Wins!!"
+  | checkWin Red board    = putStrLn "Red Wins!!" 
+  | checkWin Yellow board = putStrLn "Yellow Wins!!"
   | otherwise = do
-      update playerIndex
-      putStrLn "Player 1 (" <> show (changePlayers players playerIndex) <> "):"
+      putStrLn ("Player " ++ show playerIndex ++ "(" ++ show (changePlayers players playerIndex) ++ "):")
       putStrLn "Enter a column number "
       putStrLn "from 1 to 7 to place your piece: "
       playerColumnNum <- getLine
       --update board with piece
       case (makeMove (changePlayers players playerIndex) playerColumnNum board) of
-        | Just newBoard = print newBoard
-        | Nothing       = print board
-        | otherwise     = print board 
+        Just newBoard -> do
+          print newBoard
+          playGame newBoard (update playerIndex)
+        Nothing       -> do
+          putStrLn "That is not a valid column"
+          playGame board playerIndex
       -- print board
       -- playGame board 
       --   where newBoard = 
