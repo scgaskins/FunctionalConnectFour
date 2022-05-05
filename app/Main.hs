@@ -23,7 +23,7 @@ main = do
   putStrLn "-------------------------------------------------"
   --play game with starting board and first player Red
   playGame startingBoard 0
-    where startingBoard = emptyBoard 6 7
+    where startingBoard = emptyBoard 7 6
   
 playGame :: Board -> Int -> IO ()
 playGame board playerIndex
@@ -32,7 +32,7 @@ playGame board playerIndex
   | otherwise = do
       putStrLn ("Player " ++ show (playerIndex + 1) ++ " (" ++ show (changePlayers players playerIndex) ++ "):")
       putStrLn "Enter a column number "
-      putStrLn "from 1 to 6 to place your piece: "
+      putStrLn "from 1 to 7 to place your piece: "
       playerInput <- getLine
       let playerColumnNum = (read playerInput :: Int)
       --update board with piece
