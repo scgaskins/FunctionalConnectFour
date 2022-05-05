@@ -35,6 +35,20 @@ makeMove _ _ []         = Nothing
 makeMove color 0 (c:cs) = fmap (: cs) (addToColumn color c)
 makeMove color n (c:cs) = fmap (c :) (makeMove color (n-1) cs)
 
+--changePlayers takes a list of Colors and an Int and gives back either
+--the first or second color in the list to represent changing players
+changePlayers :: [Color] -> Int -> Color
+changePlayers [] _            = Empty
+changePlayers [Red, Yellow] 0 = Yellow
+changePlayers [Red, Yellow] 1 = Red
+changePlayers _ _             = Empty
+
+--update takes an index and gives back the other possible player index
+update :: Int -> Int
+update 0 = 1
+update 1 = 0
+update _ = error "Invalid index given"
+
 -- Adds a piece to a column, replacing the last consecutive Empty
 -- space. If there are no Empty spaces at the top, it returns Nothing
 addToColumn :: Color -> [Color] -> Maybe [Color]

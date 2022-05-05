@@ -4,41 +4,48 @@
 
 module Main where
 import System.IO (hSetBuffering, BufferMode (NoBuffering), stdout)
---import Move
---import Board
+import Board
+
+players = [Red, Yellow]
 
 main :: IO ()
 main = do
   hSetBuffering stdout NoBuffering
-  putStrLn "Welcome to Connect 4!!"
-  putStrLn "The objective of the game is to "
-  putStrLn "get four in a row before the computer." 
+  putStrLn "Welcome to Connect 4!"
+  putStrLn "The objective of the game is to get "
+  putStrLn "four in a row before the other player." 
   putStrLn "The board is 7 columns x 6 rows"
   putStrLn "Here is the starting board!"
-  --print initial board to screen
-  --playGame board
+  print startingBoard --print initial board to screen
+  --play game with starting board and first player Red
+  playGame startingBoard 0
+    where startingBoard = emptyBoard 6 7
   
--- playGame :: Board -> IO ()
--- playGame = do
---   putStrLn "Please enter a column number from 1 to 7 to "
---   putStrLn "place your piece: "
---   columnNum <- getLine
---   print columnNum --update board with piece
-  --check if won
-  --if not keep playing
-
---isWon :: Board -> IO ()
---isWon = do
-
-
-
--- main: make board and call event loop
+playGame :: Board -> Int -> IO ()
+playGame board playerIndex
+  | checkWin Red board    = printStrLn "Red Wins!!" 
+  | checkWin Yellow board = printStrLn "Yellow Wins!!"
+  | otherwise = do
+      update playerIndex
+      putStrLn "Player 1 (" <> show (changePlayers players playerIndex) <> "):"
+      putStrLn "Enter a column number "
+      putStrLn "from 1 to 7 to place your piece: "
+      playerColumnNum <- getLine
+      --update board with piece
+      case (makeMove (changePlayers players playerIndex) playerColumnNum board) of
+        | Just newBoard = print newBoard
+        | Nothing       = print board
+        | otherwise     = print board 
+      -- print board
+      -- playGame board 
+      --   where newBoard = 
+  
 
 -- event loop:
 
 -- draw board
--- is it won?
+-- is it won? (done)
 -- print the win message
--- not won?
--- get a move
--- recursive call to event loop with updated board, next player
+-- not won? (done)
+-- get a move (done)
+-- recursive call to event loop with updated board
