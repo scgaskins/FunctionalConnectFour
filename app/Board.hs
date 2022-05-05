@@ -61,7 +61,7 @@ addToColumn _ _                               = Nothing
 
 -- Check if a player of particular color has won
 checkWin :: Color -> Board -> Bool
-checkWin c b = winByDiagonals c b || winByColumns c b || winByDiagonals c b
+checkWin c b = winByDiagonals c b || winByColumns c b || winByRows c b
 
 -- Checks if there are four in a row of the color in any diagonals
 winByDiagonals :: Color -> Board -> Bool

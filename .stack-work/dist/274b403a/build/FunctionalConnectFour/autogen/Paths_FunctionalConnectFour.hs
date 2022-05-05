@@ -29,12 +29,12 @@ version :: Version
 version = Version [0,1,0,0] []
 bindir, libdir, dynlibdir, datadir, libexecdir, sysconfdir :: FilePath
 
-bindir     = "C:\\Users\\garre\\OneDrive\\Documents\\Hendrix Coursework\\Major Courses\\Computer Science\\Functional Programming\\FP Final Project\\FunctionalConnectFour\\.stack-work\\install\\5c336a55\\bin"
-libdir     = "C:\\Users\\garre\\OneDrive\\Documents\\Hendrix Coursework\\Major Courses\\Computer Science\\Functional Programming\\FP Final Project\\FunctionalConnectFour\\.stack-work\\install\\5c336a55\\lib\\x86_64-windows-ghc-8.10.7\\FunctionalConnectFour-0.1.0.0-8vss62co7Sj5odjNwwqiTv-FunctionalConnectFour"
-dynlibdir  = "C:\\Users\\garre\\OneDrive\\Documents\\Hendrix Coursework\\Major Courses\\Computer Science\\Functional Programming\\FP Final Project\\FunctionalConnectFour\\.stack-work\\install\\5c336a55\\lib\\x86_64-windows-ghc-8.10.7"
-datadir    = "C:\\Users\\garre\\OneDrive\\Documents\\Hendrix Coursework\\Major Courses\\Computer Science\\Functional Programming\\FP Final Project\\FunctionalConnectFour\\.stack-work\\install\\5c336a55\\share\\x86_64-windows-ghc-8.10.7\\FunctionalConnectFour-0.1.0.0"
-libexecdir = "C:\\Users\\garre\\OneDrive\\Documents\\Hendrix Coursework\\Major Courses\\Computer Science\\Functional Programming\\FP Final Project\\FunctionalConnectFour\\.stack-work\\install\\5c336a55\\libexec\\x86_64-windows-ghc-8.10.7\\FunctionalConnectFour-0.1.0.0"
-sysconfdir = "C:\\Users\\garre\\OneDrive\\Documents\\Hendrix Coursework\\Major Courses\\Computer Science\\Functional Programming\\FP Final Project\\FunctionalConnectFour\\.stack-work\\install\\5c336a55\\etc"
+bindir     = "C:\\Users\\sammy\\Documents\\Classes\\2021-2022\\SpringSemester\\FunctionalProgramming\\FinalProject\\FunctionalConnectFour\\.stack-work\\install\\c90bf28d\\bin"
+libdir     = "C:\\Users\\sammy\\Documents\\Classes\\2021-2022\\SpringSemester\\FunctionalProgramming\\FinalProject\\FunctionalConnectFour\\.stack-work\\install\\c90bf28d\\lib\\x86_64-windows-ghc-8.10.7\\FunctionalConnectFour-0.1.0.0-8vss62co7Sj5odjNwwqiTv-FunctionalConnectFour"
+dynlibdir  = "C:\\Users\\sammy\\Documents\\Classes\\2021-2022\\SpringSemester\\FunctionalProgramming\\FinalProject\\FunctionalConnectFour\\.stack-work\\install\\c90bf28d\\lib\\x86_64-windows-ghc-8.10.7"
+datadir    = "C:\\Users\\sammy\\Documents\\Classes\\2021-2022\\SpringSemester\\FunctionalProgramming\\FinalProject\\FunctionalConnectFour\\.stack-work\\install\\c90bf28d\\share\\x86_64-windows-ghc-8.10.7\\FunctionalConnectFour-0.1.0.0"
+libexecdir = "C:\\Users\\sammy\\Documents\\Classes\\2021-2022\\SpringSemester\\FunctionalProgramming\\FinalProject\\FunctionalConnectFour\\.stack-work\\install\\c90bf28d\\libexec\\x86_64-windows-ghc-8.10.7\\FunctionalConnectFour-0.1.0.0"
+sysconfdir = "C:\\Users\\sammy\\Documents\\Classes\\2021-2022\\SpringSemester\\FunctionalProgramming\\FinalProject\\FunctionalConnectFour\\.stack-work\\install\\c90bf28d\\etc"
 
 getBinDir, getLibDir, getDynLibDir, getDataDir, getLibexecDir, getSysconfDir :: IO FilePath
 getBinDir = catchIO (getEnv "FunctionalConnectFour_bindir") (\_ -> return bindir)
