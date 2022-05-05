@@ -6,6 +6,7 @@ module Main where
 import System.IO (hSetBuffering, BufferMode (NoBuffering), stdout)
 import Board
 
+players :: [Color]
 players = [Red, Yellow]
 
 main :: IO ()
@@ -28,10 +29,11 @@ playGame board playerIndex
   | otherwise = do
       putStrLn ("Player " ++ show playerIndex ++ "(" ++ show (changePlayers players playerIndex) ++ "):")
       putStrLn "Enter a column number "
-      putStrLn "from 1 to 7 to place your piece: "
-      playerColumnNum <- getLine
+      putStrLn "from 0 to 5 to place your piece: "
+      playerInput <- getLine
+      let playerColumnNum = (read playerInput :: Int)
       --update board with piece
-      case (makeMove (changePlayers players playerIndex) playerColumnNum board) of
+      case makeMove (changePlayers players playerIndex) playerColumnNum board of
         Just newBoard -> do
           print newBoard
           playGame newBoard (update playerIndex)
