@@ -5,8 +5,6 @@
 module Board where
 
 import Data.List (group, transpose)
---rows = 6
---columns = 7
 
 type Column = Int
 type Row = Int
