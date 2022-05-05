@@ -26,7 +26,7 @@ emptyBoard columns rows = replicate columns (replicate rows Empty)
 --formatBoard gives the board new line characters to split the board by rows
 --to read the board easier for the users
 formatBoard :: Board -> String
-formatBoard = unlines . map show
+formatBoard = unlines . map show . transpose
 
 -- Returns Columns whose topmost row is still not filled
 possibleMoves :: Board -> [Column]

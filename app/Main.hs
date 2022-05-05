@@ -17,7 +17,10 @@ main = do
   putStrLn "four in a row before the other player." 
   putStrLn "The board is 7 columns x 6 rows"
   putStrLn "Here is the starting board!"
+  putStrLn "-------------------------------------------------"
+  putStrLn ""
   putStrLn (formatBoard startingBoard) --print initial board to screen
+  putStrLn "-------------------------------------------------"
   --play game with starting board and first player Red
   playGame startingBoard 0
     where startingBoard = emptyBoard 6 7
@@ -27,15 +30,18 @@ playGame board playerIndex
   | checkWin Red board    = putStrLn "Red Wins!!" 
   | checkWin Yellow board = putStrLn "Yellow Wins!!"
   | otherwise = do
-      putStrLn ("Player " ++ show playerIndex ++ " (" ++ show (changePlayers players playerIndex) ++ "):")
+      putStrLn ("Player " ++ show (playerIndex + 1) ++ " (" ++ show (changePlayers players playerIndex) ++ "):")
       putStrLn "Enter a column number "
-      putStrLn "from 0 to 5 to place your piece: "
+      putStrLn "from 1 to 6 to place your piece: "
       playerInput <- getLine
       let playerColumnNum = (read playerInput :: Int)
       --update board with piece
-      case makeMove (changePlayers players playerIndex) playerColumnNum board of
+      case makeMove (changePlayers players playerIndex) (playerColumnNum - 1) board of
         Just newBoard -> do
+          putStrLn "-------------------------------------------------"
+          putStrLn ""
           putStrLn (formatBoard newBoard)
+          putStrLn "-------------------------------------------------"
           playGame newBoard (update playerIndex)
         Nothing       -> do
           putStrLn "That is not a valid column"
