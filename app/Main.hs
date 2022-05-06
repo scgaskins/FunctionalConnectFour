@@ -32,8 +32,8 @@ playGame board playerIndex
   | checkWin Yellow board = putStrLn (formatColor Yellow : " Wins!!")
   | otherwise = do
       putStrLn ("Player " ++ show (playerIndex + 1) ++ " (" ++ formatColor (changePlayers players playerIndex) : "):")
-      putStrLn "Enter a column number "
-      putStrLn "from 1 to 7 to place your piece: "
+      putStrLn "Enter a column number from "
+      putStrLn "1 to 7 to place your piece: "
       playerColumnNum <- readPlayerInput (possibleMoves board)
       --update board with piece
       case makeMove (changePlayers players playerIndex) playerColumnNum board of
