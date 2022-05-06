@@ -7,9 +7,13 @@ import System.IO (hSetBuffering, BufferMode (NoBuffering), stdout)
 import Text.Read (readMaybe)
 import Board
 
+-- players stores the possible 2 players 
+-- colors to be used as a reference
 players :: [Color]
 players = [Red, Yellow]
 
+-- main runs the entire Connect4 game 
+-- utilizing functions in Main and Board
 main :: IO ()
 main = do
   hSetBuffering stdout NoBuffering
@@ -26,6 +30,9 @@ main = do
   playGame startingBoard 0
     where startingBoard = emptyBoard 7 6
   
+-- playGame runs a loop and checks whether each player has 
+-- won and if not asks for another column number to add 
+-- another piece to the board before repeating the process
 playGame :: Board -> Int -> IO ()
 playGame board playerIndex
   | checkWin Red board    = putStrLn (formatColor Red :" Wins!!") 
@@ -47,9 +54,10 @@ playGame board playerIndex
           putStrLn "That is not a valid column"
           playGame board playerIndex
 
--- Given a list of valid inputs it reads in the user's
--- input and returns the input - 1 if it is a number in the
--- valid input list. Otherwise it prompts the user again
+-- readPlayerInput takes a list of valid inputs it reads 
+-- in the user's input and returns the input - 1 if it 
+-- is a number in the valid input list or it prompts the 
+-- user for a another input
 readPlayerInput :: [Int] -> IO Int
 readPlayerInput validInputs = do
   playerInput <- getLine
