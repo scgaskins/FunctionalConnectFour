@@ -24,9 +24,9 @@ main = do
   putStrLn "Here is the starting board!"
   putStrLn "-------------------------------------------------"
   putStrLn ""
-  putStrLn (formatBoard startingBoard) --print initial board to screen
+  putStrLn (formatBoard startingBoard) -- print initial board to screen
   putStrLn "-------------------------------------------------"
-  --play game with starting board and first player Red
+  -- play game with starting board and first player Red
   playGame startingBoard 0
     where startingBoard = emptyBoard 7 6
   
@@ -42,7 +42,7 @@ playGame board playerIndex
       putStrLn "Enter a column number from "
       putStrLn "1 to 7 to place your piece: "
       playerColumnNum <- readPlayerInput (possibleMoves board)
-      --update board with piece
+      -- update board with piece
       case makeMove (changePlayers players playerIndex) playerColumnNum board of
         Just newBoard -> do
           putStrLn "-------------------------------------------------"
