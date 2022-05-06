@@ -35,7 +35,7 @@ main = do
 -- another piece to the board before repeating the process
 playGame :: Board -> Int -> IO ()
 playGame board playerIndex
-  | checkWin Red board    = putStrLn (formatColor Red :" Wins!!") 
+  | checkWin Red board    = putStrLn (formatColor Red : " Wins!!") 
   | checkWin Yellow board = putStrLn (formatColor Yellow : " Wins!!")
   | otherwise = do
       putStrLn ("Player " ++ show (playerIndex + 1) ++ " (" ++ formatColor (changePlayers players playerIndex) : "):")
