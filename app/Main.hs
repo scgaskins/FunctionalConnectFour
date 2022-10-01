@@ -35,8 +35,9 @@ main = do
 -- another piece to the board before repeating the process
 playGame :: Board -> Int -> IO ()
 playGame board playerIndex
-  | checkWin Red board    = putStrLn (formatColor Red : " Wins!!") 
-  | checkWin Yellow board = putStrLn (formatColor Yellow : " Wins!!")
+  | checkWin Red board         = putStrLn (formatColor Red : " Wins!!") 
+  | checkWin Yellow board      = putStrLn (formatColor Yellow : " Wins!!")
+  | null (possibleMoves board) = putStrLn ("It's a tie!")
   | otherwise = do
       putStrLn ("Player " ++ show (playerIndex + 1) ++ " (" ++ formatColor (changePlayers players playerIndex) : "):")
       putStrLn "Enter a column number from "
